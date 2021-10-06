@@ -3,9 +3,18 @@
 /* Constants */
 const unsigned block_size = 64; // Size of a cache line (in Bytes)
 // TODO, you should try different size of cache, for example, 128KB, 256KB, 512KB, 1MB, 2MB
-const unsigned cache_size = 128; // Size of a cache (in KB)
+unsigned cache_size = 128; // Size of a cache (in KB)
 // TODO, you should try different association configurations, for example 4, 8, 16
-const unsigned assoc = 4;
+unsigned assoc = 4;
+
+unsigned mode = 0;
+
+void set_arg_vals(unsigned c, unsigned a, unsigned m)
+{
+    cache_size = c;
+    assoc = a;
+    mode = m;
+}
 
 Cache *initCache()
 {
@@ -103,14 +112,14 @@ bool insertBlock(Cache *cache, Request *req, uint64_t access_time, uint64_t *wb_
     // Step one, find a victim block
     uint64_t blk_aligned_addr = blkAlign(req->load_or_store_addr, cache->blk_mask);
 
+    bool wb_required;
     Cache_Block *victim = NULL;
-    #ifdef LRU
+    if(mode == 0)
+    {
         bool wb_required = lru(cache, blk_aligned_addr, &victim, wb_addr);
-    #endif
-
-    #ifdef LFU
+    } else {
         bool wb_required = lfu(cache, blk_aligned_addr, &victim, wb_addr);
-    #endif
+    }
     assert(victim != NULL);
 
     // Step two, insert the new block

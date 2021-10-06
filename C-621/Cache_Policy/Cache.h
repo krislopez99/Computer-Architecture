@@ -53,4 +53,6 @@ Cache_Block *findBlock(Cache *cache, uint64_t addr);
 bool lru(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr);
 bool lfu(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr);
 
+void set_arg_vals(unsigned c, unsigned a, unsigned m);
+
 #endif
