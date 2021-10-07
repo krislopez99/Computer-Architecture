@@ -1,12 +1,250 @@
-sample.mem_trace
+FILE NAME cache-size assoc-size mode
+mode = 1 | 0 -> 0 is LRU and 1 is LFU
 
-cache_size	assoc	LRU		LFU
-128			4 		42.58	47.52
-256			4 		56.6 	59.45
-512			4 		65.07	65.3
-1024		4 		65.58	65.6
-128			16 		43.74	51.69
-256			16 		62.25 	64.84
-512			16 		65.6 	65.6
-1024		16 		65.6 	65.6
 
+548.exchange2_r_llc.mem_trace 128 4 0
+Hit rate: 99.926982%
+548.exchange2_r_llc.mem_trace 128 8 0
+Hit rate: 99.958232%
+548.exchange2_r_llc.mem_trace 128 16 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 256 4 0
+Hit rate: 99.984771%
+548.exchange2_r_llc.mem_trace 256 8 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 256 16 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 4 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 8 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 16 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 4 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 8 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 16 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 4 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 8 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 16 0
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 128 4 1
+Hit rate: 86.318316%
+548.exchange2_r_llc.mem_trace 128 8 1
+Hit rate: 72.666252%
+548.exchange2_r_llc.mem_trace 128 16 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 256 4 1
+Hit rate: 99.984948%
+548.exchange2_r_llc.mem_trace 256 8 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 256 16 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 4 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 8 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 512 16 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 4 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 8 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 1024 16 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 4 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 8 1
+Hit rate: 99.985094%
+548.exchange2_r_llc.mem_trace 2048 16 1
+Hit rate: 99.985094%
+
+
+sample.mem_trace 128 4 0
+Hit rate: 42.580000%
+sample.mem_trace 128 8 0
+Hit rate: 42.780000%
+sample.mem_trace 128 16 0
+Hit rate: 43.740000%
+sample.mem_trace 256 4 0
+Hit rate: 56.600000%
+sample.mem_trace 256 8 0
+Hit rate: 60.870000%
+sample.mem_trace 256 16 0
+Hit rate: 62.250000%
+sample.mem_trace 512 4 0
+Hit rate: 65.070000%
+sample.mem_trace 512 8 0
+Hit rate: 65.410000%
+sample.mem_trace 512 16 0
+Hit rate: 65.600000%
+sample.mem_trace 1024 4 0
+Hit rate: 65.580000%
+sample.mem_trace 1024 8 0
+Hit rate: 65.600000%
+sample.mem_trace 1024 16 0
+Hit rate: 65.600000%
+sample.mem_trace 2048 4 0
+Hit rate: 65.600000%
+sample.mem_trace 2048 8 0
+Hit rate: 65.600000%
+sample.mem_trace 2048 16 0
+Hit rate: 65.600000%
+sample.mem_trace 128 4 1
+Hit rate: 47.520000%
+sample.mem_trace 128 8 1
+Hit rate: 50.740000%
+sample.mem_trace 128 16 1
+Hit rate: 51.690000%
+sample.mem_trace 256 4 1
+Hit rate: 59.450000%
+sample.mem_trace 256 8 1
+Hit rate: 63.420000%
+sample.mem_trace 256 16 1
+Hit rate: 64.840000%
+sample.mem_trace 512 4 1
+Hit rate: 65.300000%
+sample.mem_trace 512 8 1
+Hit rate: 65.520000%
+sample.mem_trace 512 16 1
+Hit rate: 65.600000%
+sample.mem_trace 1024 4 1
+Hit rate: 65.600000%
+sample.mem_trace 1024 8 1
+Hit rate: 65.600000%
+sample.mem_trace 1024 16 1
+Hit rate: 65.600000%
+sample.mem_trace 2048 4 1
+Hit rate: 65.600000%
+sample.mem_trace 2048 8 1
+Hit rate: 65.600000%
+sample.mem_trace 2048 16 1
+Hit rate: 65.600000%
+
+
+531.deepsjeng_r_llc.mem_trace 128 4 0
+Hit rate: 76.939192%
+531.deepsjeng_r_llc.mem_trace 128 8 0
+Hit rate: 79.376751%
+531.deepsjeng_r_llc.mem_trace 128 16 0
+Hit rate: 81.195524%
+531.deepsjeng_r_llc.mem_trace 256 4 0
+Hit rate: 88.972509%
+531.deepsjeng_r_llc.mem_trace 256 8 0
+Hit rate: 90.789126%
+531.deepsjeng_r_llc.mem_trace 256 16 0
+Hit rate: 91.505108%
+531.deepsjeng_r_llc.mem_trace 512 4 0
+Hit rate: 93.843631%
+531.deepsjeng_r_llc.mem_trace 512 8 0
+Hit rate: 94.859542%
+531.deepsjeng_r_llc.mem_trace 512 16 0
+Hit rate: 95.036707%
+531.deepsjeng_r_llc.mem_trace 1024 4 0
+Hit rate: 95.515018%
+531.deepsjeng_r_llc.mem_trace 1024 8 0
+Hit rate: 95.682981%
+531.deepsjeng_r_llc.mem_trace 1024 16 0
+Hit rate: 95.751690%
+531.deepsjeng_r_llc.mem_trace 2048 4 0
+Hit rate: 95.906338%
+531.deepsjeng_r_llc.mem_trace 2048 8 0
+Hit rate: 95.946182%
+531.deepsjeng_r_llc.mem_trace 2048 16 0
+Hit rate: 95.958330%
+531.deepsjeng_r_llc.mem_trace 128 4 1
+Hit rate: 75.302526%
+531.deepsjeng_r_llc.mem_trace 128 8 1
+Hit rate: 75.948467%
+531.deepsjeng_r_llc.mem_trace 128 16 1
+Hit rate: 74.911263%
+531.deepsjeng_r_llc.mem_trace 256 4 1
+Hit rate: 88.242389%
+531.deepsjeng_r_llc.mem_trace 256 8 1
+Hit rate: 88.800169%
+531.deepsjeng_r_llc.mem_trace 256 16 1
+Hit rate: 88.167742%
+531.deepsjeng_r_llc.mem_trace 512 4 1
+Hit rate: 93.506566%
+531.deepsjeng_r_llc.mem_trace 512 8 1
+Hit rate: 93.951883%
+531.deepsjeng_r_llc.mem_trace 512 16 1
+Hit rate: 93.180060%
+531.deepsjeng_r_llc.mem_trace 1024 4 1
+Hit rate: 95.333935%
+531.deepsjeng_r_llc.mem_trace 1024 8 1
+Hit rate: 95.036979%
+531.deepsjeng_r_llc.mem_trace 1024 16 1
+Hit rate: 94.467310%
+531.deepsjeng_r_llc.mem_trace 2048 4 1
+Hit rate: 95.813472%
+531.deepsjeng_r_llc.mem_trace 2048 8 1
+Hit rate: 95.603750%
+531.deepsjeng_r_llc.mem_trace 2048 16 1
+Hit rate: 95.212336%
+
+
+541.leela_r_llc.mem_trace 128 4 0
+Hit rate: 42.554451%
+541.leela_r_llc.mem_trace 128 8 0
+Hit rate: 42.586477%
+541.leela_r_llc.mem_trace 128 16 0
+Hit rate: 43.731201%
+541.leela_r_llc.mem_trace 256 4 0
+Hit rate: 70.743799%
+541.leela_r_llc.mem_trace 256 8 0
+Hit rate: 75.736557%
+541.leela_r_llc.mem_trace 256 16 0
+Hit rate: 78.815214%
+541.leela_r_llc.mem_trace 512 4 0
+Hit rate: 92.363097%
+541.leela_r_llc.mem_trace 512 8 0
+Hit rate: 94.443418%
+541.leela_r_llc.mem_trace 512 16 0
+Hit rate: 96.020614%
+541.leela_r_llc.mem_trace 1024 4 0
+Hit rate: 98.220996%
+541.leela_r_llc.mem_trace 1024 8 0
+Hit rate: 98.867637%
+541.leela_r_llc.mem_trace 1024 16 0
+Hit rate: 99.011727%
+541.leela_r_llc.mem_trace 2048 4 0
+Hit rate: 99.455119%
+541.leela_r_llc.mem_trace 2048 8 0
+Hit rate: 99.597940%
+541.leela_r_llc.mem_trace 2048 16 0
+Hit rate: 99.627833%
+541.leela_r_llc.mem_trace 128 4 1
+Hit rate: 45.554564%
+541.leela_r_llc.mem_trace 128 8 1
+Hit rate: 47.165296%
+541.leela_r_llc.mem_trace 128 16 1
+Hit rate: 46.780800%
+541.leela_r_llc.mem_trace 256 4 1
+Hit rate: 69.851638%
+541.leela_r_llc.mem_trace 256 8 1
+Hit rate: 71.792928%
+541.leela_r_llc.mem_trace 256 16 1
+Hit rate: 71.405116%
+541.leela_r_llc.mem_trace 512 4 1
+Hit rate: 89.236583%
+541.leela_r_llc.mem_trace 512 8 1
+Hit rate: 87.736296%
+541.leela_r_llc.mem_trace 512 16 1
+Hit rate: 85.241210%
+541.leela_r_llc.mem_trace 1024 4 1
+Hit rate: 96.634206%
+541.leela_r_llc.mem_trace 1024 8 1
+Hit rate: 96.410854%
+541.leela_r_llc.mem_trace 1024 16 1
+Hit rate: 94.451335%
+541.leela_r_llc.mem_trace 2048 4 1
+Hit rate: 99.132972%
+541.leela_r_llc.mem_trace 2048 8 1
+Hit rate: 99.282395%
+541.leela_r_llc.mem_trace 2048 16 1
+Hit rate: 99.058609%
