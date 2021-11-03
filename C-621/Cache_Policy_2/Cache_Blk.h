@@ -13,8 +13,9 @@ typedef struct Cache_Block
     bool valid; // Is this block valid?
     bool dirty; // Has this block been modified?
 
-    uint64_t when_touched; // The last time this block is referenced.
-    uint64_t frequency; // How many times this block is referenced.
+    uint8_t prediction;
+    uint64_t signature_m;
+    bool outcome;
 
     uint32_t set; // Which set this block belongs to?
     uint32_t way; // Which way (within this set) belongs to?

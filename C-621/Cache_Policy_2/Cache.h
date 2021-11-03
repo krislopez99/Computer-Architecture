@@ -12,8 +12,7 @@
 #include "Cache_Blk.h"
 #include "Request.h"
 
-//#define LRU
-#define LFU
+#define hash_divider 4096
 
 /* Cache */
 typedef struct Set
@@ -50,9 +49,8 @@ uint64_t blkAlign(uint64_t addr, uint64_t mask);
 Cache_Block *findBlock(Cache *cache, uint64_t addr);
 
 // Replacement Policies
-bool lru(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr);
-bool lfu(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr);
+bool pcshp(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr);
 
-void set_arg_vals(unsigned c, unsigned a, unsigned m);
+void set_arg_vals(unsigned c, unsigned a);
 
 #endif

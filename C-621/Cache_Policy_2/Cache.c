@@ -7,13 +7,12 @@ unsigned cache_size = 128; // Size of a cache (in KB)
 // TODO, you should try different association configurations, for example 4, 8, 16
 unsigned assoc = 4;
 
-unsigned mode = 0;
+uint64_t SHCT[hash_divider];
 
-void set_arg_vals(unsigned c, unsigned a, unsigned m)
+void set_arg_vals(unsigned c, unsigned a)
 {
     cache_size = c;
     assoc = a;
-    mode = m;
 }
 
 Cache *initCache()
@@ -35,8 +34,7 @@ Cache *initCache()
         cache->blocks[i].tag = UINTMAX_MAX; 
         cache->blocks[i].valid = false;
         cache->blocks[i].dirty = false;
-        cache->blocks[i].when_touched = 0;
-        cache->blocks[i].frequency = 0;
+        cache->blocks[i].outcome = false;
     }
 
     // Initialize Set-way variables
@@ -93,10 +91,9 @@ bool accessBlock(Cache *cache, Request *req, uint64_t access_time)
     {
         hit = true;
 
-        // Update access time	
-        blk->when_touched = access_time;
-        // Increment frequency counter
-        ++blk->frequency;
+        blk->outcome = true;
+        SHCT[blk->signature_m]+=1;
+        blk->prediction = 0;
 
         if (req->req_type == STORE)
         {
@@ -112,14 +109,8 @@ bool insertBlock(Cache *cache, Request *req, uint64_t access_time, uint64_t *wb_
     // Step one, find a victim block
     uint64_t blk_aligned_addr = blkAlign(req->load_or_store_addr, cache->blk_mask);
 
-    bool wb_required;
     Cache_Block *victim = NULL;
-    if(mode == 0)
-    {
-        bool wb_required = lru(cache, blk_aligned_addr, &victim, wb_addr);
-    } else {
-        bool wb_required = lfu(cache, blk_aligned_addr, &victim, wb_addr);
-    }
+    bool wb_required = pcshp(cache, blk_aligned_addr, &victim, wb_addr);
     assert(victim != NULL);
 
     // Step two, insert the new block
@@ -127,8 +118,19 @@ bool insertBlock(Cache *cache, Request *req, uint64_t access_time, uint64_t *wb_
     victim->tag = tag;
     victim->valid = true;
 
-    victim->when_touched = access_time;
-    ++victim->frequency;
+    if (victim->outcome != true)
+    {
+        SHCT[victim->signature_m]-=1;
+    }
+    victim->outcome = false;
+    victim->signature_m = req->PC % hash_divider;
+    if (SHCT[victim->signature_m] == 0)
+    {
+        victim->prediction = 2;
+    } else
+    {
+        victim->prediction = 1;
+    }
 
     if (req->req_type == STORE)
     {
@@ -170,52 +172,7 @@ Cache_Block *findBlock(Cache *cache, uint64_t addr)
     return NULL;
 }
 
-bool lru(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr)
-{
-    uint64_t set_idx = (addr >> cache->set_shift) & cache->set_mask;
-    //    printf("Set: %"PRIu64"\n", set_idx);
-    Cache_Block **ways = cache->sets[set_idx].ways;
-
-    // Step one, try to find an invalid block.
-    int i;
-    for (i = 0; i < cache->num_ways; i++)
-    {
-        if (ways[i]->valid == false)
-        {
-            *victim_blk = ways[i];
-            return false; // No need to write-back
-        }
-    }
-
-    // Step two, if there is no invalid block. Locate the LRU block
-    Cache_Block *victim = ways[0];
-    for (i = 1; i < cache->num_ways; i++)
-    {
-        if (ways[i]->when_touched < victim->when_touched)
-        {
-            victim = ways[i];
-        }
-    }
-
-    // Step three, need to write-back the victim block
-    *wb_addr = (victim->tag << cache->tag_shift) | (victim->set << cache->set_shift);
-//    uint64_t ori_addr = (victim->tag << cache->tag_shift) | (victim->set << cache->set_shift);
-//    printf("Evicted: %"PRIu64"\n", ori_addr);
-
-    // Step three, invalidate victim
-    victim->tag = UINTMAX_MAX;
-    victim->valid = false;
-    victim->dirty = false;
-    victim->frequency = 0;
-    victim->when_touched = 0;
-
-    *victim_blk = victim;
-
-    return true; // Need to write-back
-}
-
-
-bool lfu(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr)
+bool pcshp(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_addr)
 {
     uint64_t set_idx = (addr >> cache->set_shift) & cache->set_mask;
     //    printf("Set: %"PRIu64"\n", set_idx);
@@ -236,7 +193,7 @@ bool lfu(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_add
     Cache_Block *victim = ways[0];
     for (i = 1; i < cache->num_ways; i++)
     {
-        if (ways[i]->frequency < victim->frequency)
+        if (ways[i]->prediction > victim->prediction)
         {
             victim = ways[i];
         }
@@ -244,15 +201,11 @@ bool lfu(Cache *cache, uint64_t addr, Cache_Block **victim_blk, uint64_t *wb_add
 
     // Step three, need to write-back the victim block
     *wb_addr = (victim->tag << cache->tag_shift) | (victim->set << cache->set_shift);
-//    uint64_t ori_addr = (victim->tag << cache->tag_shift) | (victim->set << cache->set_shift);
-//    printf("Evicted: %"PRIu64"\n", ori_addr);
 
     // Step three, invalidate victim
     victim->tag = UINTMAX_MAX;
     victim->valid = false;
     victim->dirty = false;
-    victim->frequency = 0;
-    victim->when_touched = 0;
 
     *victim_blk = victim;
 

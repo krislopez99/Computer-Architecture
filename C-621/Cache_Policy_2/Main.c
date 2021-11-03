@@ -10,12 +10,12 @@ extern bool insertBlock(Cache *cache, Request *req, uint64_t access_time, uint64
 
 int main(int argc, const char *argv[])
 {	
-    if(argc == 5) {
-        set_arg_vals(atoi(argv[2]), atoi(argv[3]), atoi(argv[4]));
+    if(argc == 4) {
+        set_arg_vals(atoi(argv[2]), atoi(argv[3]));
     } else if(argc != 2) {
         printf("Usage: %s %s\n", argv[0], "<mem-file>");
         printf("Or\n");
-        printf("Usage: %s %s %s %s %s\n", argv[0], "<mem-file>", "<cache-size>", "<assoc>", "<mode>");
+        printf("Usage: %s %s %s %s\n", argv[0], "<mem-file>", "<cache-size>", "<assoc>");
 
         return 0;  
     }
