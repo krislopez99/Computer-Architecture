@@ -9,11 +9,6 @@
 
 #include "Instruction.h"
 
-// Predictor type
-//#define TWO_BIT_LOCAL
-//#define TOURNAMENT
-#define GSHARE
-
 // saturating counter
 typedef struct Sat_Counter
 {
@@ -24,14 +19,9 @@ typedef struct Sat_Counter
 
 typedef struct Branch_Predictor
 {
-    #ifdef TWO_BIT_LOCAL
     unsigned local_predictor_sets; // Number of entries in a local predictor
     unsigned index_mask;
 
-    Sat_Counter *local_counters;
-    #endif
-
-    #ifdef TOURNAMENT
     unsigned local_predictor_size;
     unsigned local_predictor_mask;
     Sat_Counter *local_counters;
@@ -50,17 +40,7 @@ typedef struct Branch_Predictor
 
     uint64_t global_history;
     unsigned history_register_mask;
-    #endif
-
-    #ifdef GSHARE
-    unsigned global_predictor_size;
-    unsigned global_history_mask;
-
-    Sat_Counter *global_counters;
-
-    uint64_t global_history;
-    #endif
-}Branch_Predictor;
+} Branch_Predictor;
 
 // Initialization function
 Branch_Predictor *initBranchPredictor();
@@ -79,4 +59,5 @@ bool getPrediction(Sat_Counter *sat_counter);
 // Utility
 int checkPowerofTwo(unsigned x);
 
+void set_script_parameters(int mode, unsigned lps, unsigned lcb, unsigned lhts, unsigned gps, unsigned cps);
 #endif

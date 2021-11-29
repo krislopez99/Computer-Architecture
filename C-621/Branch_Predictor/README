@@ -1,0 +1,17 @@
+To compile the program, run "make".
+
+To run the program, use "./Main <trace-file>"
+
+Where...
+ - <trace-file> is the path to the cpu trace file workload
+
+The program can also be run with other parameters, below is the usage statment of the script.
+
+    Default 2-bit Local Predictor   ./Main <trace-file>
+    Modified gShare Predictor       ./Main <global-predictor-size> <trace-file>
+    Modified 2-Bit Local Predictor  ./Main <local-predictor-size> <local-counter-bits> <trace-file>
+    Modified Tournament Predictor   ./Main <local-history-table-size> <global-predictor-size> <choice-predictor-size> <trace-file>
+
+The script "test_file.py" was used to run tests on the 3 cpu trace files with different parameters
+
+The file "Project_3.pdf" contains the report.

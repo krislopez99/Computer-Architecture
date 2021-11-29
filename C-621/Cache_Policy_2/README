@@ -1,17 +1,17 @@
 To compile the program, run "make".
 
-To run the program, use "./Main <mem-file> <cache-size> <assoc-config> <mode>"
+To run the program, use "./Main <mem-file> <cache-size> <assoc-config>"
 
 Where...
  - <mem-file> is the path to the memory trace file (String)
  - <cache-size> is the size of the cache in KB (Int)
  - <assoc-config> is the type of association configuration (Int)
- - <mode> is the mode of the memory replacement algorithm. 0 is LRU and 1 is LFU.
 
  The program can also be run with just "./Main <mem-file>".
  <mem-file> is the same as above and the default settings will be...
  <cache-size> = 128
  <assoc-config> = 4
- <mode> = 0
 
  The script "testing_script.sh" was used to run tests on the 3 mem trace files with different parameters
+
+ The file "Project 2.pdf" contains the report.
